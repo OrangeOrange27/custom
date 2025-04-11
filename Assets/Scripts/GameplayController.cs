@@ -18,6 +18,7 @@ namespace DefaultNamespace
         
         //todo: move out of GameplayController
         [SerializeField] private ScoreView _scoreView;
+        [SerializeField] private GameObject _winPanel;
 
         private ICardsVisualSystem _cardsVisualSystem;
         private ICardsConfigProvider _cardsConfigProvider;
@@ -108,6 +109,7 @@ namespace DefaultNamespace
         private void GameOver()
         {
             SoundManager.Instance.Play(SoundType.Victory);
+            _winPanel.SetActive(true);
         }
 
         private void OnDestroy()
