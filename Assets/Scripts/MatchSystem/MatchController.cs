@@ -13,7 +13,12 @@ namespace DefaultNamespace
 
         public void SelectCard(CardModel model)
         {
+            if(model==null)
+                return;
+            
+            model.IsRevealed.Value = true;
             model.View.Uncover();
+            
             if (_selectedCard == null)
             {
                 _selectedCard = model;

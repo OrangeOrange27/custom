@@ -7,6 +7,7 @@ namespace DefaultNamespace
         private readonly IMatchController _matchController;
         
         private int _currentScore;
+        private int _streak;
 
         public int Score
         {
@@ -19,8 +20,6 @@ namespace DefaultNamespace
         }
 
         public event Action<int> OnScoreChanged;
-
-        private int _streak;
         
         public ScoreSystem(IMatchController matchController)
         {
@@ -28,6 +27,11 @@ namespace DefaultNamespace
             
             _matchController.OnMatchSuccess += OnMatchSuccess;
             _matchController.OnMatchFail += OnMatchFail;
+        }
+        
+        public void ResetScore(int score)
+        {
+            Score = score;
         }
 
         private void OnMatchSuccess(CardModel card1, CardModel card2)

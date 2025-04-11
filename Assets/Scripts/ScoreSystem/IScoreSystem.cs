@@ -6,6 +6,8 @@ namespace DefaultNamespace
     {
         int Score { get; }
         
-        event Action<int> OnScoreChanged; 
+        event Action<int> OnScoreChanged;
+
+        public void ResetScore(int score);
     }
 }

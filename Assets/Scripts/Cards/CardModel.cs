@@ -10,5 +10,6 @@ namespace DefaultNamespace
         public int MatchNumber;
         public Sprite CardImage;
         public ReactiveProperty<bool> IsInteractable = new(true);
+        public ReactiveProperty<bool> IsRevealed = new();
     }
 }

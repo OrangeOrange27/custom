@@ -10,9 +10,12 @@ namespace DefaultNamespace
 
         void SetImage(Sprite sprite);
         void SetInteractable(bool interactable);
+        void Reveal();
         
         UniTask Cover();
         UniTask Uncover();
         UniTask Match();
+
+        void Kill();
     }
 }

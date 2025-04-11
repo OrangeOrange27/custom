@@ -30,6 +30,11 @@ public class CardView : MonoBehaviour, ICardView, IPointerDownHandler
         _canvasGroup.blocksRaycasts = interactable;
     }
 
+    public void Reveal()
+    {
+        _image.gameObject.SetActive(true);
+    }
+
     public async UniTask Cover()
     {
         _cancellationTokenSource.Cancel();
@@ -54,8 +59,8 @@ public class CardView : MonoBehaviour, ICardView, IPointerDownHandler
         sequence.AppendInterval(0.1f);
 
         await sequence.AsyncWaitForCompletion();
-        
-        Destroy(gameObject);
+
+        Kill();
     }
 
     private async UniTask Flip(bool isFrontVisible, CancellationToken token)
@@ -68,7 +73,8 @@ public class CardView : MonoBehaviour, ICardView, IPointerDownHandler
 
             await transform.DOScaleX(0f, halfDuration).SetEase(Ease.InQuad).ToUniTask(cancellationToken: token);
 
-            _image.gameObject.SetActive(isFrontVisible);
+            if(_image != null) 
+                _image.gameObject.SetActive(isFrontVisible);
 
             await transform.DOScaleX(1f, halfDuration).SetEase(Ease.OutQuad).ToUniTask(cancellationToken: token);
         }
@@ -81,6 +87,11 @@ public class CardView : MonoBehaviour, ICardView, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         OnTap?.Invoke();
+    }
+    
+    public void Kill()
+    {
+        Destroy(gameObject);
     }
 
     public void Dispose()
