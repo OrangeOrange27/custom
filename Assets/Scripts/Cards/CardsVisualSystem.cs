@@ -43,7 +43,7 @@ namespace DefaultNamespace
 
         private async UniTask<ICardViewController> LoadSpawnView(CardModel model, CancellationToken token)
         {
-            var view = Object.Instantiate(_cardViewPrefab, _cardsParent) as ICardView;
+            ICardView view = Object.Instantiate(_cardViewPrefab, _cardsParent);
             var viewController = new CardViewController();
 
             model.View = view;
