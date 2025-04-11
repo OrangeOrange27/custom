@@ -1,3 +1,4 @@
+using DefaultNamespace.Utils;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -8,6 +9,6 @@ namespace DefaultNamespace
         public ICardView View;
         public int MatchNumber;
         public Sprite CardImage;
-        public bool IsMatched;
+        public ReactiveProperty<bool> IsInteractable;
     }
 }

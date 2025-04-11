@@ -20,11 +20,13 @@ namespace DefaultNamespace
         public void InitObserving()
         {
             _view.OnTap += OnViewTap;
+            _model.IsInteractable.OnValueChanged += _view.SetInteractable;
         }
 
         public void Dispose()
         {
             _view.OnTap -= OnViewTap;
+            _model.IsInteractable.OnValueChanged -= _view.SetInteractable;
         }
 
         private void OnViewTap()

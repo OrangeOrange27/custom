@@ -9,6 +9,8 @@ namespace DefaultNamespace
         event Action OnTap;
 
         void SetImage(Sprite sprite);
+        void SetInteractable(bool interactable);
+        
         UniTask Cover();
         UniTask Uncover();
         UniTask Match();

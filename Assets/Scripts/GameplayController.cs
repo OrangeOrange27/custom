@@ -43,9 +43,17 @@ namespace DefaultNamespace
         {
             CreateCardModels(gameConfig);
             await _cardsVisualSystem.SpawnInitViews(_cards, CancellationToken.None);
-            await UniTask.WaitForSeconds(_revealTime);
+            
             foreach (var card in _cards)
             {
+                card.IsInteractable.Value = false;
+            }
+            
+            await UniTask.WaitForSeconds(_revealTime);
+            
+            foreach (var card in _cards)
+            {
+                card.IsInteractable.Value = true;
                 card.View.Cover();
             }
         }
@@ -87,6 +95,9 @@ namespace DefaultNamespace
 
         private void OnMatch(CardModel card1, CardModel card2)
         {
+            card1.IsInteractable.Value = false;
+            card2.IsInteractable.Value = false;
+            
             _cards.Remove(card1);
             _cards.Remove(card2);
             

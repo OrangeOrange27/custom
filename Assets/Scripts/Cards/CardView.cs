@@ -24,6 +24,12 @@ public class CardView : MonoBehaviour, ICardView, IPointerDownHandler
         _image.sprite = sprite;
     }
 
+    public void SetInteractable(bool interactable)
+    {
+        _canvasGroup.interactable = interactable;
+        _canvasGroup.blocksRaycasts = interactable;
+    }
+
     public async UniTask Cover()
     {
         _cancellationTokenSource.Cancel();
@@ -40,8 +46,7 @@ public class CardView : MonoBehaviour, ICardView, IPointerDownHandler
 
     public async UniTask Match()
     {
-        _canvasGroup.interactable = false;
-        _canvasGroup.blocksRaycasts = false;
+        SetInteractable(false);
         
         var sequence = DOTween.Sequence();
         sequence.Append(transform.DOScale(1.2f, _matchDuration).SetEase(Ease.InOutSine));
