@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+
 namespace DefaultNamespace
 {
     public class MatchController
@@ -24,16 +26,16 @@ namespace DefaultNamespace
         {
             if (_selectedCard.MatchNumber == model.MatchNumber && _selectedCard != model)
             {
-                Match(model);
+                Match(model).Forget();
             }
             else
             {
-                model.View.Cover();
-                _selectedCard.View.Cover();
+                model.View.Cover().Forget();
+                _selectedCard.View.Cover().Forget();
             }
         }
         
-        private void Match(CardModel model)
+        private async UniTask Match(CardModel model)
         {
             _score++;
             model.View.Match();

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: GameConfigSO
   m_EditorClassIdentifier: 
   _config:
-    CardsCount: 8
+    CardsCount: 12

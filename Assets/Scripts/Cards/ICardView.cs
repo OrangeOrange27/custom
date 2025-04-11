@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -8,8 +9,8 @@ namespace DefaultNamespace
         event Action OnTap;
 
         void SetImage(Sprite sprite);
-        void Cover();
-        void Uncover();
-        void Match();
+        UniTask Cover();
+        UniTask Uncover();
+        UniTask Match();
     }
 }

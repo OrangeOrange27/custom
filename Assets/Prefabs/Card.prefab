@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3733993647021745284}
   - component: {fileID: 3733993647021745285}
   - component: {fileID: 836916430585020100}
+  - component: {fileID: -8244077737565527630}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -91,6 +92,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _image: {fileID: 3733993647688519730}
+  _canvasGroup: {fileID: -8244077737565527630}
+  _matchDuration: 0.5
+  _flipDuration: 0.5
+--- !u!225 &-8244077737565527630
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3733993647021745275}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3733993647688519728
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,7 +119,7 @@ GameObject:
   - component: {fileID: 3733993647688519741}
   - component: {fileID: 3733993647688519730}
   m_Layer: 5
-  m_Name: Image
+  m_Name: FrontSide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
