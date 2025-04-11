@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using DefaultNamespace.Models.CardsConfig;
+using DefaultNamespace.SoundSystem;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -33,6 +34,7 @@ namespace DefaultNamespace
 
             _cardsVisualSystem.OnCardTap += RegisterCardClick;
             _scoreSystem.OnScoreChanged += _scoreView.SetScore;
+            _matchController.OnMatchSuccess += OnMatch;
 
             InitiateGameplay(_gameConfig.Config).Forget();
         }
@@ -83,10 +85,25 @@ namespace DefaultNamespace
             return card;
         }
 
+        private void OnMatch(CardModel card1, CardModel card2)
+        {
+            _cards.Remove(card1);
+            _cards.Remove(card2);
+            
+            if(_cards.Count<=0)
+                GameOver();
+        }
+
+        private void GameOver()
+        {
+            SoundManager.Instance.Play(SoundType.Victory);
+        }
+
         private void OnDestroy()
         {
             _cardsVisualSystem.OnCardTap -= RegisterCardClick;
             _scoreSystem.OnScoreChanged -= _scoreView.SetScore;
+            _matchController.OnMatchSuccess -= OnMatch;
         }
     }
 }

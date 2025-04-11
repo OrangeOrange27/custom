@@ -8,5 +8,6 @@ namespace DefaultNamespace
         public ICardView View;
         public int MatchNumber;
         public Sprite CardImage;
+        public bool IsMatched;
     }
 }

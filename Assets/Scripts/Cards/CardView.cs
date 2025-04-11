@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using DefaultNamespace;
+using DefaultNamespace.SoundSystem;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -57,6 +58,8 @@ public class CardView : MonoBehaviour, ICardView, IPointerDownHandler
         try
         {
             var halfDuration = _flipDuration / 2f;
+            
+            SoundManager.Instance.Play(SoundType.Flip);
 
             await transform.DOScaleX(0f, halfDuration).SetEase(Ease.InQuad).ToUniTask(cancellationToken: token);
 

@@ -30,13 +30,13 @@ namespace DefaultNamespace
             _matchController.OnMatchFail += OnMatchFail;
         }
 
-        private void OnMatchSuccess()
+        private void OnMatchSuccess(CardModel card1, CardModel card2)
         {
             _streak++;
             Score += _streak;
         }
 
-        private void OnMatchFail()
+        private void OnMatchFail(CardModel card1, CardModel card2)
         {
             _streak = 0;
         }

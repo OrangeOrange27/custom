@@ -4,8 +4,8 @@ namespace DefaultNamespace
 {
     public interface IMatchController
     {
-        event Action OnMatchSuccess; 
-        event Action OnMatchFail;
+        event Action<CardModel, CardModel> OnMatchSuccess; 
+        event Action<CardModel, CardModel> OnMatchFail;
 
         void SelectCard(CardModel model);
     }

@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using DefaultNamespace.SoundSystem;
 
 namespace DefaultNamespace
 {
@@ -7,8 +8,8 @@ namespace DefaultNamespace
     {
         private CardModel _selectedCard;
 
-        public event Action OnMatchSuccess;
-        public event Action OnMatchFail;
+        public event Action<CardModel, CardModel> OnMatchSuccess;
+        public event Action<CardModel, CardModel> OnMatchFail;
 
         public void SelectCard(CardModel model)
         {
@@ -38,13 +39,15 @@ namespace DefaultNamespace
 
         private async UniTask Match(CardModel model)
         {
-            OnMatchSuccess?.Invoke();
+            SoundManager.Instance.Play(SoundType.Match);
+            OnMatchSuccess?.Invoke(model, _selectedCard);
             await UniTask.WhenAll(model.View.Match(), _selectedCard.View.Match());
         }
 
         private async UniTask FailMatch(CardModel model)
         {
-            OnMatchFail?.Invoke();
+            SoundManager.Instance.Play(SoundType.Error);
+            OnMatchFail?.Invoke(model, _selectedCard);
             await UniTask.WhenAll(model.View.Cover(), _selectedCard.View.Cover());
         }
     }
