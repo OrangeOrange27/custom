@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class CardsConfigProvider
+    public class CardsConfigProvider : ICardsConfigProvider
     {
         private readonly Dictionary<int, Sprite> _spritesDictionary;
         

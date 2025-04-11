@@ -321,6 +321,7 @@ GameObject:
   - component: {fileID: 951667756}
   - component: {fileID: 951667758}
   - component: {fileID: 951667757}
+  - component: {fileID: 951667759}
   m_Layer: 5
   m_Name: Score
   m_TagString: Untagged
@@ -368,7 +369,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score: '
+  m_text: 'Score: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -445,6 +446,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 951667755}
   m_CullTransparentMesh: 1
+--- !u!114 &951667759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951667755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54d0c4c9e99487dabbfbcef72073bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreText: {fileID: 951667757}
 --- !u!1 &1131848385
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,6 +579,7 @@ MonoBehaviour:
   _gameConfig: {fileID: 11400000, guid: e1eeb0881a2e54d63bc2685a6af05f8e, type: 2}
   _cardViewPrefab: {fileID: 836916430585020100, guid: ea0cf9cc063aa4223887e0ad0073c981, type: 3}
   _gameArea: {fileID: 1131848386}
+  _scoreView: {fileID: 951667759}
 --- !u!4 &1350731469
 Transform:
   m_ObjectHideFlags: 0

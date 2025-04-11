@@ -1,11 +1,14 @@
+using System;
 using Cysharp.Threading.Tasks;
 
 namespace DefaultNamespace
 {
-    public class MatchController
+    public class MatchController : IMatchController
     {
         private CardModel _selectedCard;
-        private int _score;
+
+        public event Action OnMatchSuccess;
+        public event Action OnMatchFail;
 
         public void SelectCard(CardModel model)
         {
@@ -13,7 +16,6 @@ namespace DefaultNamespace
             if (_selectedCard == null)
             {
                 _selectedCard = model;
-                return;
             }
             else
             {
@@ -21,7 +23,7 @@ namespace DefaultNamespace
                 _selectedCard = null;
             }
         }
-        
+
         private void TryMatch(CardModel model)
         {
             if (_selectedCard.MatchNumber == model.MatchNumber && _selectedCard != model)
@@ -30,16 +32,20 @@ namespace DefaultNamespace
             }
             else
             {
-                model.View.Cover().Forget();
-                _selectedCard.View.Cover().Forget();
+                FailMatch(model).Forget();
             }
         }
-        
+
         private async UniTask Match(CardModel model)
         {
-            _score++;
-            model.View.Match();
-            _selectedCard.View.Match();
+            OnMatchSuccess?.Invoke();
+            await UniTask.WhenAll(model.View.Match(), _selectedCard.View.Match());
+        }
+
+        private async UniTask FailMatch(CardModel model)
+        {
+            OnMatchFail?.Invoke();
+            await UniTask.WhenAll(model.View.Cover(), _selectedCard.View.Cover());
         }
     }
 }

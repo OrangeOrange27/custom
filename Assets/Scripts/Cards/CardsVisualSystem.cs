@@ -10,17 +10,15 @@ namespace DefaultNamespace
     public class CardsVisualSystem : ICardsVisualSystem
     {
         private readonly DisposableBag _disposableBag = new();
-        private readonly CardsConfigProvider _cardsConfigProvider;
         private readonly Transform _cardsParent;
         private readonly CardView _cardViewPrefab;
 
         private ICardViewController[] _viewControllers;
 
-        public CardsVisualSystem(CardsConfigProvider cardsConfigProvider, Transform cardsParent, CardView cardViewPrefab)
+        public CardsVisualSystem(Transform cardsParent, CardView cardViewPrefab)
         {
             _cardsParent = cardsParent;
             _cardViewPrefab = cardViewPrefab;
-            _cardsConfigProvider = cardsConfigProvider;
         }
 
         public event Action<CardModel> OnCardTap;

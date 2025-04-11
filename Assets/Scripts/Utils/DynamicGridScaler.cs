@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,8 @@ public class DynamicGridScaler : MonoBehaviour
     {
         grid = GetComponent<GridLayoutGroup>();
         UpdateGridLayout();
+        
+        PostUpdate().Forget();
     }
 
     private void UpdateGridLayout()
@@ -38,6 +41,12 @@ public class DynamicGridScaler : MonoBehaviour
         grid.constraintCount = columnCount;
         grid.spacing = new Vector2(spacing, spacing);
         grid.padding = new RectOffset(padding, padding, padding, padding);
+    }
+
+    private async UniTask PostUpdate()
+    {
+        await UniTask.Yield(PlayerLoopTiming.LastPostLateUpdate);
+        grid.enabled = false;
     }
 }
 

@@ -15,19 +15,25 @@ namespace DefaultNamespace
         [SerializeField] private CardView _cardViewPrefab;
         [SerializeField] private Transform _gameArea;
         
-        private ICardsVisualSystem _cardsVisualSystem; 
-        private CardsConfigProvider _cardsConfigProvider; 
-        private MatchController _matchController;
+        //todo: move out of GameplayController
+        [SerializeField] private ScoreView _scoreView;
+
+        private ICardsVisualSystem _cardsVisualSystem;
+        private ICardsConfigProvider _cardsConfigProvider;
+        private IMatchController _matchController;
+        private IScoreSystem _scoreSystem;
         private List<CardModel> _cards;
-        
+
         private void Awake()
         {
-            _cardsVisualSystem = new CardsVisualSystem(_cardsConfigProvider, _gameArea, _cardViewPrefab);
+            _cardsVisualSystem = new CardsVisualSystem(_gameArea, _cardViewPrefab);
             _cardsConfigProvider = new CardsConfigProvider(_cardsConfig.Config);
             _matchController = new MatchController();
-            
+            _scoreSystem = new ScoreSystem(_matchController);
+
             _cardsVisualSystem.OnCardTap += RegisterCardClick;
-            
+            _scoreSystem.OnScoreChanged += _scoreView.SetScore;
+
             InitiateGameplay(_gameConfig.Config).Forget();
         }
 
@@ -75,6 +81,12 @@ namespace DefaultNamespace
             };
 
             return card;
+        }
+
+        private void OnDestroy()
+        {
+            _cardsVisualSystem.OnCardTap -= RegisterCardClick;
+            _scoreSystem.OnScoreChanged -= _scoreView.SetScore;
         }
     }
 }
